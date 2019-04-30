@@ -1,0 +1,54 @@
+Floating-Point-ALU-in-Verilog
+
+Floating-point is the most preferred data type to ensure high-accuracy calculations for algorithm modelling and simulation. Their operations are important for computations involving large dynamic range, but they require significantly more resources than integer operations. FPGA gained huge popularity in market as it has good flexibility and programmability. The rapid advance in FPGA technology makes such devices increasingly attractive for implementing floating-point arithmetic. FPGA are reprogrammable making them flexible for faster prototyping. Once Prototyping is completed, they can be configured for Application Specific Integrated Circuit. Algorithms for 32-BIT floating point operations based on standard IEEE – 754 has been designed using HDL language Verilog and verified by applying test vectors for all cases including exceptions. Also, by using python Simulink model test vectors are generated and verified entire design up to 0.1Million Iterations which resulted in complete verification of design successfully. Later on, these algorithms are implemented on Diligent Nexys4 DDR FPGA and verified favorably according to functional verification using VIO (Virtual Input/Output) as the design specification is large enough to face the difficulty to verify the functionality on the target board. Since, there is no possibility to access on physical input and output devices on the target hardware, to drive and monitor signals that are present on the real hardware.
+
+
+PREFACE
+
+Floating point operations which find their application in vast areas such as mathematical optimization methods, digital signal and image processing algorithms. High demand of attention has been paid on the design and research of the floating-point processing units. With the increasing requirements for the floating-point operations the requirements for the implementation of the floating-point arithmetic has been very easy and convenient in the floating-point high-level languages, but the implementation of the arithmetic by hardware has been very difficult. High-speed hardware floating-point processing units have become more and more demanding. The development of FPGA (Field Programmable Gate Array) Technology which has greater flexibility and as they are not pre-defined to certain tasks, they have become best option for implementing floating-point algorithms.
+
+ALU has following functions where Algorithms of floating-point operations such as addition, subtraction, multiplication and division based on standard IEEE-754, Logic operations like OR, AND, XOR, Right Shift and left shift, complement and Conversion from floating point numbers to integer numbers. They have been designed in Verilog and implementation of FPGA. All cases including corner cases and exceptions are tested and verified in ModelSim and even verified successfully for implementation on board Diligent Nexys4 DDR FPGA using Vivado Xilinx Tool. Complete functional verification has been done by using generation of test vectors from python floating-point IEEE-754 library over 0.1Million test vectors then applying these vectors to design using testbench and compared obtained results with expected results and cross checked all test passes and fails in run time conditions.
+
+Implementation on FPGA is performed using VIO method. The VIO core is a customizable IP that can used to monitor and drive internal FPGA signals in the real time. The number and size of the input and output ports are customizable to interface with the design under test. Since as the VIO core is synchronous to the design being monitored and/or driven, all design clock constraints that are applied to our design and are also applied to the components inside the VIO core.
+
+FLOATING POINT ALU
+
+Arithmetic logic unit which performs logical and arithmetic operations. In this ALU it is capable of performing not only integer operations but also floating operations based on IEEE-754. It has following functionality:
+Arithmetic Operations:
+1-	Addition.
+2-	Subtraction.
+3-	Multiplication.
+4-	Division.
+Logic Operations:
+1-	OR Operation
+2-	AND Operation
+3-	XOR Operation
+4-	Left Shift Operation
+5-	Right Shift Operation.
+6-	Complement.
+Extra Operation is Converting from Floating to decimal. 
+
+TESTING METHOD
+
+The algorithms of addition, subtraction and multiplication has been designed on Verilog HDL and design is synthesizable. These designs have to be verified for all cases to check for proper functionality. The testing has been done on ModelSim platform and performed in two methods:
+1-	Writing test cases for study of entire design and to compare expected result with obtained result. Secondly, from this the design is verified for every exception case and verified toggling of flags respectively.
+2-	After this method of completion, using float 32 Python library 0.1Million test vectors are generated and applied to design using test bench. Then test bench compares expected result with obtained results and gives output whether test is passed or failed and correspondingly there is count of how many test cases are passed and failed out of 0.1Million.
+
+IMPLEMENTATION ON FPGA
+
+After completion of functional verification, designs are implemented on FPGA for FPGA functional verification, area, power and speed analysis. Here the design specification is large enough to face the difficulty to verify the functionality on the target board. Since, there is no possibility to access on physical input and output devices on the target hardware, to drive and monitor signals that are present on the real hardware. In this section, VIO method is proposed for implementation of design with Xilinx Vivado System Design Suite 2018.2 on Diligent Nexys4 DDR FPGA Development Board.
+
+
+Implementation Procedure:
+1-	Create Project in Xilinx and add design source files in it.
+2-	Create VIO Core from IP Catalog option and in VIO Core set inputs of design as output and outputs of design as inputs for VIO.
+3-	Instantiate both design and VIO core in top module and in top module it has only one input port that is clk. No other ports.
+4-	Create XDC file for top module and connect to clk pin of FPGA.
+5-	Generate bitstream and Implement this design on FPGA.
+6-	 Program Device.
+7-	VIO HW Manager will POP- UP where virtually inputs can be applied and outputs can be seen.
+
+CONCLUSION AND FUTURE SCOPE OF WORK
+
+In this ALU, the algorithms for floating pointing operations are considered for all cases including special cases. The algorithms can be used for IEEE 754 standard 64Bit floating numbers. Now a days bfloat16 numbers are being used for making tensor models which helps in machine learning, for this purpose these algorithms are suitable and can be implemented. 
+Algorithms can be optimized by using pipelining architecture and can be implemented on FPGA. The technique for implementation on FPGA can be made using USB serial interface for heavy testing rather than using VIO which can process only one iteration at a time and can`t be automated. 
